@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ExamSidekick helps you prepare with practice quizzes, mock tests, study plans and progress tracking." />
+  <title>ExamSidekick — Prepare smarter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">E</span><span>Exam<span class="brand-accent">Sidekick</span></span></a>
+    <nav class="nav-links">
+      <a href="#dashboard">Dashboard</a><a href="#practice">Practice</a><a href="#planner">Study planner</a>
+    </nav>
+    <button class="profile" id="profileBtn" aria-label="Edit your name">BS</button>
+  </header>
+
+  <main class="shell">
+    <section class="hero" id="dashboard">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse"></span> YOUR PERSONAL EXAM COMPANION</span>
+        <h1>Make every study<br><span>session count.</span></h1>
+        <p>Learn at your pace, practise with purpose, and walk into your next exam with confidence.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#practice">Start practising <span>→</span></a><a class="text-link" href="#planner">Build a study plan</a></div>
+      </div>
+      <div class="hero-art">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="study-card">
+          <div class="card-top"><span class="mini-icon">✦</span><span>WEEKLY PROGRESS</span><span class="live-dot"></span></div>
+          <div class="progress-number"><strong id="heroProgress">0%</strong><span>completed</span></div>
+          <div class="progress-track"><div id="heroProgressBar" class="progress-fill"></div></div>
+          <div class="week-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+          <div class="streak"><span>🔥</span><div><b id="streakCount">0 day streak</b><small>Keep showing up!</small></div></div>
+        </div>
+        <div class="floating-note note-top">✎ &nbsp; Small steps, big results</div>
+        <div class="floating-note note-bottom">✓ &nbsp; You've got this!</div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Your study statistics">
+      <article class="stat-card"><div class="stat-icon purple">▣</div><div><span>Quizzes completed</span><strong id="quizCount">0</strong></div><small class="stat-foot">Keep practising</small></article>
+      <article class="stat-card"><div class="stat-icon green">◎</div><div><span>Average score</span><strong id="averageScore">—</strong></div><small class="stat-foot">Across completed quizzes</small></article>
+      <article class="stat-card"><div class="stat-icon orange">◷</div><div><span>Study time</span><strong id="studyTime">0 min</strong></div><small class="stat-foot">Time spent in quizzes</small></article>
+      <article class="stat-card"><div class="stat-icon blue">♧</div><div><span>Best score</span><strong id="bestScore">—</strong></div><small class="stat-foot">Your personal best</small></article>
+    </section>
+
+    <section class="section-head" id="practice"><div><span class="eyebrow">LEARN BY DOING</span><h2>Choose your practice</h2><p>Pick a subject and test what you know.</p></div><span class="section-tag">✨ Practice makes progress</span></section>
+    <div class="filter-row">
+      <div class="filters" id="subjectFilters"><button class="filter active" data-filter="All">All subjects</button><button class="filter" data-filter="Science">Science</button><button class="filter" data-filter="Mathematics">Mathematics</button><button class="filter" data-filter="English">English</button><button class="filter" data-filter="Reasoning">Reasoning</button></div>
+      <label class="search-box">⌕ <input id="searchInput" type="search" placeholder="Search topics..." /></label>
+    </div>
+    <div class="quiz-grid" id="quizGrid"></div>
+
+    <section class="planner-section" id="planner">
+      <div class="planner-intro"><span class="eyebrow">STAY CONSISTENT</span><h2>Your study planner</h2><p>Set a daily target and add the topics you want to cover. Your plan stays saved on this device.</p><div class="planner-tip">💡 <span><b>Study tip</b><br>Try 25 minutes of focused study followed by a 5-minute break.</span></div></div>
+      <div class="planner-card">
+        <div class="planner-title"><div><h3>Today's plan</h3><p id="todayDate"></p></div><span class="plan-count" id="taskCount">0 tasks</span></div>
+        <form id="taskForm" class="task-form"><input id="taskInput" type="text" maxlength="90" placeholder="Add a topic or task..." required /><button class="btn btn-primary" type="submit">Add +</button></form>
+        <div class="task-list" id="taskList"></div>
+        <div class="plan-progress"><div><span>Daily progress</span><b id="planPercent">0%</b></div><div class="progress-track"><div id="planBar" class="progress-fill"></div></div></div>
+      </div>
+    </section>
+
+    <section class="quote-strip"><span>“</span><p>Success is the sum of small efforts, repeated day in and day out.</p><small>— Robert Collier</small></section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-mark">E</span><span>Exam<span class="brand-accent">Sidekick</span></span></a><span>Built for curious minds. © <span id="year"></span> ExamSidekick</span><a href="README.md">About this project</a></footer>
+
+  <div class="modal-backdrop hidden" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="quiz-modal">
+      <div class="modal-header"><div><span class="eyebrow" id="modalSubject">PRACTICE QUIZ</span><h2 id="modalTitle">Quiz title</h2></div><button class="icon-btn" id="closeQuiz" aria-label="Close quiz">✕</button></div>
+      <div class="quiz-meta"><span id="questionProgress">Question 1 of 5</span><span id="quizTimer">00:00</span></div>
+      <div class="progress-track"><div id="questionBar" class="progress-fill"></div></div>
+      <div id="questionArea"></div>
+      <div class="modal-footer"><button class="btn btn-ghost" id="quitQuiz">Exit quiz</button><button class="btn btn-primary" id="nextQuestion" disabled>Next question →</button></div>
+      <div id="resultArea" class="hidden"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
